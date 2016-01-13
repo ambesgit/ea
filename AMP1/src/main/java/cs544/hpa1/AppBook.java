@@ -3,36 +3,40 @@ package cs544.hpa1;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 
 public class AppBook {
-    private static final EntityManagerFactory entityManager=Persistence.createEntityManagerFactory("cs544_HPA2"); 
-    
+    private static final SessionFactory sessionFactory;
+    private static final ServiceRegistry serviceRegistry;
 
-    
+    static {
+        Configuration configuration = new Configuration();
+        configuration.configure();
+        serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+                configuration.getProperties()).build();
+        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+    }
     //----------------******MAIN METHOD*********-------------
     public static void main(String[] args){
-        EntityManager entityMgr=null;
-        EntityTransaction tx=null;
+        Session session=null;
+        Transaction tx=null;
         
         //add books to the database
         try{
-            entityMgr=entityManager.createEntityManager();
-            tx=entityMgr.getTransaction();
-            tx.begin();
+            session=sessionFactory.openSession();
+            tx=session.beginTransaction();
             Book b1=new Book("coreJava", "1234wasert_j", "author1", 23.09, new Date());
             Book b2=new Book("coreHibernate", "1234wasert_s", "author2", 33.09, new Date());
             Book b3=new Book("coreSpring", "1234wasert_h", "author3", 43.09, new Date());
-            entityMgr.persist(b1);
-            entityMgr.persist(b2);
-            entityMgr.persist(b3);
+            session.save(b1);
+            session.save(b2);
+            session.save(b3);
             tx.commit();
         }
         catch(HibernateException e){
@@ -42,8 +46,8 @@ public class AppBook {
             }
         }
         finally{
-             if (entityMgr != null) {
-                entityMgr.close();
+             if (session != null) {
+                session.close();
             }
         }
         
@@ -52,10 +56,9 @@ public class AppBook {
         
         try{
             
-            entityMgr=entityManager.createEntityManager();
-            tx=entityMgr.getTransaction();
-            tx.begin();
-            List<Book> books=entityMgr.createQuery("from Book").getResultList();
+            session=sessionFactory.openSession();
+            tx=session.beginTransaction();
+            List<Book> books=session.createQuery("from Book").list();
             for(Book book:books){
             System.out.println(book);
             }
@@ -68,23 +71,22 @@ public class AppBook {
             }
         }
         finally{
-            if(entityMgr!=null){
-                entityMgr.close();
+            if(session!=null){
+                session.close();
             }
         }
         
         //retrieve one book from the database
         
         try{
-            entityMgr=entityManager.createEntityManager();
-            tx=entityMgr.getTransaction();
-            tx.begin();
-            System.out.println(entityMgr.find(Book.class, 1));
-            Book b=(Book)entityMgr.find(Book.class, 1);
+            session=sessionFactory.openSession();
+            tx=session.beginTransaction();
+            System.out.println(session.get(Book.class, 1));
+            Book b=(Book)session.get(Book.class, 1);
             b.setTitle("UpdatedVersion");
             b.setPrice(56.89);
-            entityMgr.flush();
-            entityMgr.remove((Book)entityMgr.find(Book.class, 2));
+            session.update(b);
+            session.delete((Book)session.load(Book.class, 2));
             tx.commit();
             
         
@@ -96,8 +98,8 @@ public class AppBook {
             }
         }
         finally{
-        if(entityMgr!=null){
-            entityMgr.close();
+        if(session!=null){
+            session.close();
         }
         }
         
@@ -105,10 +107,9 @@ public class AppBook {
         
         try{
             
-            entityMgr=entityManager.createEntityManager();
-            tx=entityMgr.getTransaction();
-            tx.begin();
-            List<Book> bks=entityMgr.createQuery("select b from Book b").getResultList();
+            session=sessionFactory.openSession();
+            tx=session.beginTransaction();
+            List<Book> bks=session.createQuery("from Book").list();
             for(Book b:bks){
                 System.out.println(b);
             }
@@ -120,8 +121,8 @@ public class AppBook {
             tx.rollback();
         }
         finally{
-            if(entityMgr!=null){
-                entityMgr.close();
+            if(session!=null){
+                session.close();
             }
         }
     }
