@@ -19,8 +19,7 @@ public class OpenSessionInViewFilter implements Filter {
         public void init(FilterConfig arg) throws ServletException{
             sf=HibernateUtil.getSessionFactory();
              //initializing the database but not the right place to do it here
-                Transaction tx=null;
-                tx=sf.getCurrentSession().beginTransaction();
+                Transaction tx=sf.getCurrentSession().beginTransaction();
                 Student student = new Student(11334, "Frank", "Brown");
 		Course course1 = new Course(1101, "Java", "A");
 		Course course2 = new Course(1102, "Math", "B-");
