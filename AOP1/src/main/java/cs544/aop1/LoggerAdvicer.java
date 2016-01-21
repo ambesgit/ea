@@ -22,14 +22,14 @@ public class LoggerAdvicer {
       
         
     }
-    @Around("execution(* cs544.aop1.CustomerDAO.Save(..))")
+    @Around("execution(* cs544.aop1.CustomerDAO.save(..))")
     public Object invoke(ProceedingJoinPoint call) throws Throwable{
-        StopWatch sw =new StopWatch();
-        sw.start(call.getSignature().getName());
+        StopWatch sw =new StopWatch("");
+        sw.start(call.toShortString());
         Object retVal = call.proceed();
         sw.stop();
         long totaltime=sw.getLastTaskTimeMillis();
-        System.out.println("Time to execute save="+sw.prettyPrint());
+        System.out.println("Time to execute save="+totaltime);
         return  retVal;
     }
     
