@@ -1,18 +1,20 @@
-package cs544.exercise16_2;
+package cs544.sph2;
 
-import cs544.exercise16_2.util.HibernateUtil;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class StudentDAO {
-        private static SessionFactory sf=HibernateUtil.getSessionFactory();
+        private SessionFactory sf;
 	private static Collection<Student> studentlist = new ArrayList<Student>();
-     /*
-	static {            
+        public StudentDAO(SessionFactory fs){
+            this.sf=sf;
+        }
+     
+	public void init(){            
            
 		Student student = new Student(11334, "Frank", "Brown");
 		Course course1 = new Course(1101, "Java", "A");
@@ -20,12 +22,11 @@ public class StudentDAO {
 		student.addCourse(course1);
 		student.addCourse(course2);
 		studentlist.add(student); //this was used with the array so no important now
-                Transaction tx=sf.getCurrentSession().beginTransaction();
                 sf.getCurrentSession().saveOrUpdate(student);
-                tx.commit();
+                
 
 	}	
-        */
+        
         public Student get(long id){
             return (Student)sf.getCurrentSession().get(Student.class, id);
         }

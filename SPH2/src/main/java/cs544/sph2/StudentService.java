@@ -1,17 +1,21 @@
-package cs544.exercise16_2;
+package cs544.sph2;
 
-import cs544.exercise16_2.util.HibernateUtil;
-import org.hibernate.Hibernate;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Transactional;
 
+
+@Transactional
 public class StudentService {
     //private SessionFactory sf=HibernateUtil.getSessionFactory();
 	private StudentDAO studentdao;
 
-	public StudentService() {
-		studentdao = new StudentDAO();
+	public StudentService(StudentDAO st) {
+		studentdao = st;
 	}
+
+    public void setStudentdao(StudentDAO studentdao) {
+        this.studentdao = studentdao;
+    }
+        
 
 	public Student getStudent(long studentid) {
             //Transaction tx=sf.getCurrentSession().beginTransaction();

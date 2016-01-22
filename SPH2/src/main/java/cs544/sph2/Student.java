@@ -1,4 +1,4 @@
-package cs544.exercise16_2;
+package cs544.sph2;
 
 import java.util.ArrayList;
 import java.util.Collection;
