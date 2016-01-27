@@ -15,7 +15,7 @@ public class Book {
 	private int id;
     @NotEmpty
 	private String title;
-    @Pattern(regex="\d{3}-\d{10}",flag="")
+    //@Pattern(regex="\d{3}-\{10]")
 	private String ISBN;
         @NotEmpty
 	private String author;

@@ -20,7 +20,8 @@
 	</tr>
 	</c:forEach>
 	</table>
-	
-	<a href="addBook.html"> Add a Book</a>
+        <form method="get" action="addBook">
+            <input type="submit" value="addBook"/>
+        </form>
 </body>
 </html>
