@@ -1,10 +1,25 @@
 package cs544.mvc1;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
 public class Book {
+    @Id
+    @GeneratedValue
 	private int id;
+    @NotEmpty
 	private String title;
+    @Pattern(regex="\d{3}-\d{10}",flag="")
 	private String ISBN;
+        @NotEmpty
 	private String author;
+        @Min(value=0)
 	private double price;
 
 	public Book() {

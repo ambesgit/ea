@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import cs544.sample.NoSuchResourceException;
-
+import javax.transaction.Transactional;
 public class BookDao implements IBookDao {
 	private static int idCount = 1;
 	private Map<Integer, Book> books = new HashMap<>();

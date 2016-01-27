@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BookController {
+  
     @Resource
     private IBookDao bookDao;
     @RequestMapping(value="/")
