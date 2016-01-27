@@ -1,14 +1,18 @@
 package cs544.sample;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 //@RequestMapping(value="/cars")
@@ -20,18 +24,19 @@ public class CarController {
 	public String redirectRoot() {
 		return "redirect:/cars";
 	}
-	@RequestMapping(value="/login",method=RequestMethod.GET)
-        public String getLoginPage(){
-            return "login";
+	
+       @RequestMapping(value = "/addCar", method = RequestMethod.GET)
+       public String addCar(@ModelAttribute("car") Car car) {
+        return "addCar";
         }
-        
+      
 	@RequestMapping(value="/cars", method=RequestMethod.GET)
 	public String getAll(Model model) {
 		model.addAttribute("cars", carDao.getAll());
 		return "carList";
 	}
 	
-	@RequestMapping(value="/cars", method=RequestMethod.POST)
+	@RequestMapping(value="/addCar", method=RequestMethod.POST)
 	public String add(Car car) {
 		carDao.add(car);
 		return "redirect:/cars";

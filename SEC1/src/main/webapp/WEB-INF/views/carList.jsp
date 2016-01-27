@@ -19,7 +19,7 @@
 		<td>${car.color}</td>
                 <sec:authorize access="hasRole('ROLE_ADMIN')" >
                         <td><a href="cars/${car.id}">edit</a></td>
-                    </sec:authorize>
+                 </sec:authorize>
 		
 	</tr>
 	</c:forEach>
@@ -27,7 +27,7 @@
         <sec:authorize url="/addCar" >
             <a href="addCar"> Add a Car</a>
         </sec:authorize>        
-	<a href="j_spring_security_logout">logout</a>
+	<a href="login">logout</a>
 	
 </body>
 </html>
