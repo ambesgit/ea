@@ -1,11 +1,12 @@
 package cs544.sph1.bank.domain;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Customer {
+public class Customer implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id;

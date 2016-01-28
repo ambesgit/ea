@@ -12,8 +12,9 @@ import cs544.sph1.bank.jms.IJMSSender;
 import cs544.sph1.bank.jms.JMSSender;
 import cs544.sph1.bank.logging.ILogger;
 import cs544.sph1.bank.logging.Logger;
+import java.io.Serializable;
 
-public class AccountService implements IAccountService {
+public class AccountService implements IAccountService, Serializable{
 
     private IAccountDAO accountDAO;
     private ICurrencyConverter currencyConverter;

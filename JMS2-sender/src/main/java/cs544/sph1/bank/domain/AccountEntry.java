@@ -1,5 +1,6 @@
 package cs544.sph1.bank.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,7 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class AccountEntry {
+public class AccountEntry implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id;

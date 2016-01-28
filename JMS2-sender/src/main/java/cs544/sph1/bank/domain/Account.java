@@ -1,5 +1,6 @@
 package cs544.sph1.bank.domain;
 
+import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.CascadeType;
@@ -9,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Account {
+public class Account implements Serializable{
 	@Id
 	private long accountnumber;
 	
