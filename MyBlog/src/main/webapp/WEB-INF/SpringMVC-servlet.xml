@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util "       
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+                           http://www.springframework.org/schema/util 
+                           http://www.springframework.org/schema/util/spring-util-4.0.xsd
+                           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <!--  HIBERNATE NEEDS THIS TO CONNECT AND INTERACT WITH DATABASE,THIS PROJECT IS DONE BY AMBASAGER -->
+   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">    
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost/blog" />
+        <property name="username" value="root" />
+        <property name="password" value="" />
+        
+    </bean> 
+    
+    <!--THIS IS FOR HIBERNATE FRAMEWORK TO CONFIGURE ITSELF     -->
+    <bean id="hibernateProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="connection.pool.size">1</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <!--<prop key="hibernate.current_session_context_class">thread</prop>-->
+                
+            </props>
+        </property>        
+    </bean>
+    
+    <!--  THIS IS THE SESSION FACTORY WHERE A SESSION 
+    IS A TEMPORARY VIRTUAL MEMORY WHERE ENTTITIES LIVE AND  
+    THE STATE OF ENTITIES MANIPULATED-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties" ref="hibernateProperties"/>
+        <property name="annotatedClasses">
+            <list>               
+                <value>cs544.blog.domain.Blog</value>
+                <value>cs544.blog.domain.Blogger</value>
+                <value>cs544.blog.domain.Comment</value>
+                <value>cs544.blog.domain.Reader</value> 
+                <value>cs544.blog.domain.Address</value>                 
+            </list>
+        </property>
+    </bean>
+    <!-- BEANS OF SERVICE CLASSE, DAO AND 
+    THE BEAN FOR SESSION FACTORY IS IN THE HIBERNATE CONFIG FILE BY THE ID sessionFactory, 
+    ASPECT,CONTROLLER-->
+    <bean id="blogDao" class="cs544.blog.dao.BlogDao">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="bloggerDao" class="cs544.blog.dao.BloggerDao">
+           <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="commentDao" class="cs544.blog.dao.CommentDao">
+           <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="readerDao" class="cs544.blog.dao.ReaderDao">
+           <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="addressDao" class="cs544.blog.dao.AddressDao">
+           <constructor-arg ref="sessionFactory"/>
+    </bean>
+   <bean id="bloggerDto" class="cs544.blog.service.BloggerDto"/>
+    <bean id="blogService" class="cs544.blog.service.BlogService">
+        <constructor-arg ref="blogDao"/>
+        <constructor-arg ref="bloggerDao"/>
+        <constructor-arg ref="commentDao"/>
+        <constructor-arg ref="readerDao"/>
+        <constructor-arg ref="addressDao"/>
+    </bean>        
+ <!-- THE FOLLOWING WILL BE USED FOR MVC CONFIGURATION-->
+ <mvc:annotation-driven/> 
+ <context:component-scan base-package="cs544.blog.service"/> 
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+      <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+      <property name="prefix" value="/WEB-INF/views/"/>
+      <property name="suffix" value=".jsp"/>
+  </bean>
+  <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/> 
+   <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"> 
+       <property name="sessionFactory" ref="sessionFactory"/> 
+   </bean>
+       
+  <mvc:resources mapping="/resources/**" location="/resources/"/>
+  <mvc:default-servlet-handler/>
+</beans>
