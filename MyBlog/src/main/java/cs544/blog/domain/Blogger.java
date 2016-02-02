@@ -28,8 +28,7 @@ public class Blogger {
     private String userName;
    
     private String password;
-    @Embedded
-   
+    @Embedded   
     private Address address; 
     
     
@@ -106,5 +105,10 @@ public class Blogger {
         this.phone=phone;
         this.password=password;
         this.address=address;
+    }
+    //add blogs through blogger    
+    public Blog addBlog(Blog blog){
+        blogs.add(blog);
+        return blog;    
     }
 }

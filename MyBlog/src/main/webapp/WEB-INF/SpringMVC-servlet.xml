@@ -73,6 +73,8 @@
            <constructor-arg ref="sessionFactory"/>
     </bean>
    <bean id="bloggerDto" class="cs544.blog.service.BloggerDto"/>
+   <bean id="credintial" class="cs544.blog.service.Credintial"/>
+   <bean id="principal" class="cs544.blog.service.Principal"/>
     <bean id="blogService" class="cs544.blog.service.BlogService">
         <constructor-arg ref="blogDao"/>
         <constructor-arg ref="bloggerDao"/>
@@ -95,4 +97,9 @@
        
   <mvc:resources mapping="/resources/**" location="/resources/"/>
   <mvc:default-servlet-handler/>
+  
+  <!--  added 10:29 2-2-2016-->
+  <mvc:annotation-driven/>
+  <context:annotation-config/>
+  
 </beans>

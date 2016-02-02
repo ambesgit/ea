@@ -22,6 +22,7 @@
                 padding:10px;
                 font-size:30px;
                 color:black;
+                text-decoration: none;
             }
             .login{
                 
@@ -32,6 +33,7 @@
                 margin-top: 0px;
                 overflow: no-display;
                 float: right;
+                text-decoration: none;
             }
             table,h1{
                 width:400px;
@@ -56,5 +58,22 @@
                 <a class="links"href="/MyBlog/comment">COMMENT</a>
                 <a class="login" href="/MyBlog/login">LOGIN</a>
             </div>
+        <form:form commandName="credintial" action="login" method="post" cssClass="menu">
+            <form:errors path="*" cssClass="errorblock" element="div" />
+            <table>
+                <tr>                    
+                    <td>UserName:</td>
+                    <td><form:input path="userName" /> </td>
+                    <td><form:errors path="userName" cssClass="error"/> </td>
+                </tr>
+                <tr>
+                    <td>password:</td>
+                    <td><form:password path="password"/> </td>
+                    <td><form:errors path="password" cssClass="error"/> </td>
+               
+            </table>
+            <input type="submit"/>
+
+        </form:form>
     </body>
 </html>

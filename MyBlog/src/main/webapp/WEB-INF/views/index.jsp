@@ -21,6 +21,7 @@
                 padding:10px;
                 font-size:30px;
                 color:black;
+                text-decoration: none;
             }
             .login{
                 
@@ -31,6 +32,7 @@
                 margin-top: 0px;
                 overflow: no-display;
                 float: right;
+                text-decoration: none;
             }
         </style>
     </head>

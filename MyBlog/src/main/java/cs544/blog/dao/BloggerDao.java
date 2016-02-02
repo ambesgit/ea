@@ -45,5 +45,11 @@ public class BloggerDao implements IBloggerDao{
     public List<Blog> getAllBlogs() {
         return sf.getCurrentSession().createQuery("select b from Blogger br join br.blogs b").list();
     }
+
+    @Override
+    public Blog addBlong(Blog blog) {
+        sf.getCurrentSession().save(blog);
+        return blog;
+    }
     
 }

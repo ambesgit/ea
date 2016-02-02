@@ -24,6 +24,7 @@
                 padding:10px;
                 font-size:30px;
                 color:black;
+                text-decoration: none;
             }
             .login{
                 
@@ -34,6 +35,7 @@
                 margin-top: 0px;
                 overflow: no-display;
                 float: right;
+                text-decoration: none;
             }
             table,h1{
                 width:400px;
@@ -56,7 +58,7 @@
                 <a class="links" href="/MyBlog/blogger">REGISTER</a>
                 <a class="links"href="/MyBlog/post">POST</a>
                 <a class="links"href="/MyBlog/comment">COMMENT</a>
-                <a class="login" href="/MyBlog/login">LOGIN</a>
+                <a class="login" href="/MyBlog/index">LogOut</a>
             </div>
         
        <form:form commandName="blog" action="post" method="post" cssClass="menu">            

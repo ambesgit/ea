@@ -98,6 +98,7 @@ public class BloggerDto {
     public void setZip(int zip) {
         this.zip = zip;
     }
+    
     public Blogger bloggerFactory(){
     return new Blogger(new Address(street, city,state,zip),name, email,userName,password,phone);
     } 

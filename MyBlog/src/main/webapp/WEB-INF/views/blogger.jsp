@@ -21,6 +21,7 @@
                 padding:10px;
                 font-size:30px;
                 color:black;
+                text-decoration: none;
             }
             .login{
                 
@@ -31,6 +32,7 @@
                 margin-top: 0px;
                 overflow: no-display;
                 float: right;
+                text-decoration: none;
             }
             tr{
                 font-size: 20px;
@@ -71,7 +73,7 @@
                 </tr>
                 <tr>
                     <td>password:</td>
-                    <td><form:input path="password" /> </td>
+                    <td><form:password path="password" /> </td>
                     <td><form:errors path="password" cssClass="error"/> </td>
                 </tr>
                  <tr>

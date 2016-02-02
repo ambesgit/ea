@@ -22,6 +22,8 @@ public class BlogService {
     private final ICommentDao commentDao;
     private final IReaderDao readerDao;
     private final IAddressDao addressDao;
+
+    
    
     public BlogService(IAddressDao addressDao,IBlogDao blogDao,IBloggerDao bloggerDao,ICommentDao commentDao,IReaderDao readerDao){    
             this.blogDao=blogDao;
@@ -31,15 +33,20 @@ public class BlogService {
             this.addressDao=addressDao;
             
     }
+     //blogger specific
    public Blogger addBlogger(Blogger b){
        return bloggerDao.addBlogger(b);
-   }
+   }   
+  
    public List<Blogger> getBloggers(){
         return bloggerDao.getAllBloggers();
-   }
-    public List<Blog> getBlogs(){
+   }  
+    
+    //blog specific 
+    public Blog addBlog(Blog blog){
+        return blogDao.addBlog(blog);
+    }
+     public List<Blog> getBlogs(){
         return bloggerDao.getAllBlogs();
     }
-    
-    
 }
