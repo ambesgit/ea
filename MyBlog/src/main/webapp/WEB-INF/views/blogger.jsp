@@ -8,9 +8,9 @@
         <title>Blogger</title>
          <style>
             .menu{
-                 width:800px;
-                 hieght:300px;
-                 background-color: orange;
+                 width:800px;                 
+                 color:white;
+                 background-color:lightslategray;
                  border:1px solid black;
                  position:relative;
                  margin-left: auto;
@@ -19,14 +19,14 @@
             }
             .links{
                 padding:10px;
-                font-size:30px;
-                color:black;
+                font-size:20px;
+                color:white;
                 text-decoration: none;
             }
             .login{
                 
-                font-size:30px;
-                color:black;
+                font-size:20px;
+                color:white;
                 position: relative;
                 margin-right: 0px;
                 margin-top: 0px;
@@ -35,8 +35,20 @@
                 text-decoration: none;
             }
             tr{
+                color:black;
                 font-size: 20px;
                 padding:5px;
+                height:40px;
+            }
+            input{
+                height:25px;
+                font-size:15px;
+                width:200px;
+                border-radius: 5px;                
+                background-color:lightgrey;
+            }
+            .submit{                
+                width:100px;
             }
         </style>
     </head>
@@ -44,7 +56,7 @@
          <div class="menu">
                 <a class="links" href="/MyBlog/blog">BLOG</a>
                 <a class="links" href="/MyBlog/blogger">REGISTER</a>
-                <a class="links"href="/MyBlog/post">POST</a>
+                <a class="links"href="/MyBlog/post_">POST</a>
                 <a class="links"href="/MyBlog/comment">COMMENT</a>
                 <a class="login" href="/MyBlog/login">LOGIN</a>
             </div>
@@ -97,7 +109,7 @@
                     <td><form:errors path="zip" cssClass="error"/> </td>
                 </tr>
             </table>
-            <input type="submit"/>
+            <input type="submit" class="submit"/>
 
         </form:form>
     </body>

@@ -28,12 +28,12 @@ public class Blog {
     private int views=0;
     private Date postedDate;
     public Blog(){}
-    public Blog(String t,String c,Blogger a,Date date,Comment comment){
+    public Blog(String t,String c,Blogger a,Date date){
         this.author=a;       
         this.content=c;
         this.postedDate=date;
         this.title=t;
-        this.comments.add(comment);
+        
     }
     public Long getId() {
         return id;
@@ -73,6 +73,7 @@ public class Blog {
 
     public void addComment(Comment c) {
         this.comments.add(c);
+        views+=1;
     }
 
     public int getViews() {

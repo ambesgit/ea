@@ -10,5 +10,6 @@ public interface IBlogDao {
     public boolean deleteBlog(Blog blog);
     public Blog updateBlog(Blog blog);
     public Blog getBlog(int id);
+    public List<Blog> getAllBlog();
    
 }

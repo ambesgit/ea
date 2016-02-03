@@ -10,7 +10,7 @@
             .menu{
                  width:800px;
                  hieght:300px;
-                 background-color: orange;
+                 background-color:lightslategray;
                  border:1px solid black;
                  position:relative;
                  margin-left: auto;
@@ -19,13 +19,13 @@
             }
             .links{
                 padding:10px;
-                font-size:30px;
+                font-size:20px;
                 color:black;
                  text-decoration: none;
             }
             .login{
                 
-                font-size:30px;
+                font-size:20px;
                 color:black;
                 position: relative;
                 margin-right: 0px;
@@ -34,26 +34,34 @@
                 float: right;
                 text-decoration: none;
             }
+            .mate{
+                color:black;
+                border: 1px solid black;
+                border-right: 3px;
+                background-color: white;
+            }
         </style>
     </head>
-    <body>
+    <body >
             <div class="menu">
                 <a class="links" href="/MyBlog/blog">BLOG</a>
                 <a class="links" href="/MyBlog/blogger">REGISTER</a>
-                <a class="links"href="/MyBlog/post">POST</a>
+                <a class="links"href="/MyBlog/post_">POST</a>
                 <a class="links"href="/MyBlog/comment">COMMENT</a>
                 <a class="login" href="/MyBlog/login">LOGIN</a>
             </div>
-        <h1>Blogs Based On Popularity</h1>
-	<table>
-	<c:forEach var="blog" items="${blogs}">
-	<tr>
-		<td>${blog.content}</td>
-		<td>${blog.views}</td>
-		<td>${blog.postedDate}</td>
-		<td>${blog.author}</td>
-		
-	</tr>
+        
+	<table class="menu">
+        <tr><h2 class="menu mate">Blogs Based On Popularity</h2></tr>
+	<c:forEach var="blog" items="${blogs}">  
+         <tr class="mate">
+         <td><pre>Title: "${blog.title}" </pre><pre>Number of views: ${blog.views}</pre>
+         <pre>Posted on: ${blog.postedDate}</pre></td>
+        </tr>
+        <tr>    
+         <td>${blog.content}</td>
+        </tr>
+      	
 	</c:forEach>
 	</table>
     </body>

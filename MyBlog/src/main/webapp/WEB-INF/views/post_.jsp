@@ -13,7 +13,7 @@
             .menu{
                  width:800px;
                  hieght:300px;
-                 background-color: orange;
+                 background-color:lightslategray;
                  border:1px solid black;
                  position:relative;
                  margin-left: auto;
@@ -22,13 +22,13 @@
             }
             .links{
                 padding:10px;
-                font-size:30px;
+                font-size:20px;
                 color:black;
                 text-decoration: none;
             }
             .login{
                 
-                font-size:30px;
+                font-size:20px;
                 color:black;
                 position: relative;
                 margin-right: 0px;
@@ -44,11 +44,20 @@
                  margin-right: auto;
             }
             .submit{                
-                background-color: black;
-                font-size: 30px;
+                background-color: orange;
+                font-size: 20px;
                 color:white;
-                border: 1px solid orange;
-                margin-left:200px; 
+                border: 1px solid red;
+                position: relative;
+                float: right;
+                margin-left:400px; 
+                border-bottom-left-radius: 3px;
+                border-bottom-right-radius: 3px;
+            }
+            textarea,input{
+                border-radius: 5px;
+                border-color: blue;
+                background-color:lemonchiffon;
             }
         </style>
     </head>
@@ -56,20 +65,28 @@
          <div class="menu">
                 <a class="links" href="/MyBlog/blog">BLOG</a>
                 <a class="links" href="/MyBlog/blogger">REGISTER</a>
-                <a class="links"href="/MyBlog/post">POST</a>
+                <a class="links"href="/MyBlog/post_">POST</a>
                 <a class="links"href="/MyBlog/comment">COMMENT</a>
                 <a class="login" href="/MyBlog/index">LogOut</a>
             </div>
         
-       <form:form commandName="blog" action="post" method="post" cssClass="menu">            
+       <form:form commandName="blog" action="post_" method="post" cssClass="menu">            
             <form:errors path="*" cssClass="errorblock" element="div" />
+            
             <table>
+                 
                 <tr>
-                   <h1>Post your Blog </h1>
-                    <td><form:errors path="title" cssClass="error" /> </td>
+                   <h1>Post your Blog </h1>                    
+                </tr> 
+                <tr>
+                    <td> 
+                        <form:label for="title"path="">Title:</form:label>
+                        <form:input path="title" id="title"/> 
+                    </td>
+                    <td><form:errors path="title" cssClass="error"/> </td>
                 </tr>
                 <tr>                  
-                    <td><form:textarea path="content" rows="30" cols="50"/> </td>
+                    <td><form:textarea path="content" rows="25" cols="100"/> </td>
                     <td><form:errors path="content" cssClass="error"/> </td>
                 </tr> 
                 

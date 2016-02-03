@@ -43,10 +43,10 @@ public class BlogService {
    }  
     
     //blog specific 
-    public Blog addBlog(Blog blog){
-        return blogDao.addBlog(blog);
+    public Blogger addBlogger(Blogger blogger,Blog blog){
+        return bloggerDao.addBlogger(blogger,blog);
     }
      public List<Blog> getBlogs(){
-        return bloggerDao.getAllBlogs();
+        return blogDao.getAllBlog();
     }
 }

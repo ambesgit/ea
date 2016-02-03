@@ -1,6 +1,7 @@
 
 package cs544.blog.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Embedded;
@@ -9,14 +10,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.transaction.Transactional;
 
 @Entity
-public class Blogger {
+public class Blogger implements Serializable{
     @Id
     @GeneratedValue
     private Long id;
     @OneToMany
     @JoinColumn
+    
     private List<Blog> blogs=new ArrayList();
   
     private String name;
@@ -107,8 +110,8 @@ public class Blogger {
         this.address=address;
     }
     //add blogs through blogger    
-    public Blog addBlog(Blog blog){
+    public Blogger addBlog(Blog blog){
         blogs.add(blog);
-        return blog;    
+        return this;    
     }
 }

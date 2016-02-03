@@ -12,6 +12,6 @@ public interface IBloggerDao {
     public Blogger getBlogger(int id);    
     public List<Blogger> getAllBloggers();
     public List<Blog> getAllBlogs();
-    public Blog addBlong(Blog blog);
+    public Blogger addBlogger(Blogger blogger, Blog blog);
     
 }
