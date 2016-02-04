@@ -51,4 +51,11 @@ public class BlogService {
     public Comment addComment(long id,Comment comment){
         return commentDao.addComment(id, comment);
     }
+    public boolean deleteBlog(long id){
+       return  blogDao.deleteBlog(id);
+    }
+    
+     public boolean updateBlog(Blog blog){
+       return  blogDao.updateBlog(blog);
+    }
 }

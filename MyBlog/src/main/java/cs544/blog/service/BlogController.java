@@ -8,8 +8,10 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +40,7 @@ public class BlogController {
     //Welcome page
     @RequestMapping(value="/")
     public String welcomePage(){
-            return "index";
+            return "redirect:/blog";
         }
     @RequestMapping(value="/index")
     public String indexPage(){
@@ -61,7 +63,8 @@ public class BlogController {
         List<Blogger> bloggers=blogService.getBloggers();
         for(Blogger b:bloggers){
             if(b.getUserName().equals(credintial.getUserName())&& b.getPassword().equals(credintial.getPassword()))
-               session.setAttribute("bgr",b);           
+               session.setAttribute("bgr",b); 
+            session.setAttribute("cre",credintial);
               return "index";
         }
         return "redirect:/login";    
@@ -88,10 +91,15 @@ public class BlogController {
       //post page 
      @RequestMapping(value="/post_", method=RequestMethod.POST)
      public String postBlog(HttpSession session,Blog blog){
+         
          Blogger b=(Blogger)session.getAttribute("bgr");                 
          blogService.addBlogger(b,blog);
          return "redirect:/post_";
-     }     
+         
+         
+     } 
+     
+   
    
      @RequestMapping(value="/post_", method=RequestMethod.GET)
      public String gettBlog(HttpSession session,@ModelAttribute Blog blog){
@@ -115,20 +123,20 @@ public class BlogController {
        
      }  
      
-     //Comment page
-     @RequestMapping(value="/comment",method=RequestMethod.GET)
-     public String getComment(@ModelAttribute Comment comment){
+   //Delete      
+     @RequestMapping(value="/delete/{blogId}",method=RequestMethod.GET)
+     public String deleteBlog(HttpSession session,@PathVariable long blogId){
          
-        return "comment";
+         Blog b=(Blog)blogService.getBlog(blogId);
+          if(session.getAttribute("bgr")!=null && 
+                 b.getAuthor().getPassword().equals(((Credintial)session.getAttribute("cre")).getPassword())
+                 &&b.getAuthor().getUserName().equals(((Credintial)session.getAttribute("cre")).getUserName())
+             )
+         {
+             
+          blogService.deleteBlog(blogId);
+          return "redirect:/blog";
+         }
+         else return "redirect:/blog";
         }
-     @RequestMapping(value="/comment/{blogId}",method=RequestMethod.POST)
-     public String postComments(@PathVariable long blogId,Comment comment){
-         //process the post 
-        return "redirect:/blog/"+blogId;
-     }
-     @RequestMapping(value="/comment/{blogId}",method=RequestMethod.GET)
-     public String getCommentByBlogId(Model m,@PathVariable long blogId,Comment comment){  
-                 
-        return "redirect:/blog/"+blogId;
-     }
 }

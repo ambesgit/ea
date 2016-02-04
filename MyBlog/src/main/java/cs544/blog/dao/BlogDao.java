@@ -20,15 +20,17 @@ public class BlogDao implements IBlogDao{
     }
 
     @Override
-    public boolean deleteBlog(Blog blog) {
-        sf.getCurrentSession().delete(blog);
+    public boolean deleteBlog(long id) {
+        Blog blog=(Blog)sf.getCurrentSession().get(Blog.class, id);
+         sf.getCurrentSession().delete(blog);
+         sf.getCurrentSession().flush();
         return blog!=null;
     }
 
     @Override
-    public Blog updateBlog(Blog blog) {
+    public boolean updateBlog(Blog blog) {        
         sf.getCurrentSession().saveOrUpdate(blog);
-        return blog;
+        return true;
         
     }
 

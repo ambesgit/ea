@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IBloggerDao {
     public Blogger addBlogger(Blogger blogger);
-    public boolean deleteBlogger(Blogger blogger);
+    public boolean deleteBlogger(long id);
     public Blogger updateBlogger(Blogger blogger);
     public Blogger getBlogger(int id);    
     public List<Blogger> getAllBloggers();

@@ -58,10 +58,6 @@
                 border-color: blue;
                 background-color:lemonchiffon;
             }
-            .error,.errorblock{
-                
-                color:red;
-            }
         </style>
     </head>
     <body>
@@ -72,7 +68,7 @@
                 <a class="login" href="/MyBlog/index">LogOut</a>
             </div>
         
-       <form:form commandName="blog" action="post_" method="post" cssClass="menu">            
+       <form:form commandName="blog" action="update_blog" method="post" cssClass="menu">            
             <form:errors path="*" cssClass="errorblock" element="div" />
             
             <table>

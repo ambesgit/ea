@@ -1,7 +1,9 @@
 
 package cs544.blog.service;
 
-public class Credintial {
+import java.io.Serializable;
+
+public class Credintial implements Serializable{
     private String userName;
     private String password;
 

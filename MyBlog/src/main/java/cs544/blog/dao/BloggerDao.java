@@ -22,8 +22,10 @@ public class BloggerDao implements IBloggerDao{
     }
 
     @Override
-    public boolean deleteBlogger(Blogger blogger) {
+    public boolean deleteBlogger(long id) {
+        Blogger blogger=(Blogger)sf.getCurrentSession().get(Blogger.class, id);
         sf.getCurrentSession().delete(blogger);
+        sf.getCurrentSession().flush();
         return blogger!=null;
     }
 

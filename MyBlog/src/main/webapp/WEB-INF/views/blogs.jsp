@@ -34,11 +34,17 @@
                 float: right;
                 text-decoration: none;
             }
-            .mate,#id{
+            .mate,.detail{
                 color:black;
                 border: 1px solid black;
                 border-right: 3px;
                 background-color: white;
+            }
+            .edit{
+                color:white;
+                border: 1px solid black;
+                border-right: 3px;
+                background-color: black;
             }
         </style>
     </head>
@@ -59,7 +65,8 @@
              
          <td>${blog.content}</td>
         </tr> 
-        <tr><td><a href="/MyBlog/blog/${blog.id}" id="detail">Detail</a></td></tr>
+        <tr><td><a href="/MyBlog/blog/${blog.id}" class="detail edit">Detail</a>            
+            <a href="/MyBlog/delete/${blog.id}" class="detail edit">Delete</a></td></tr>
 	</c:forEach>
 	</table>
     </body>
