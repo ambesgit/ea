@@ -10,7 +10,7 @@
             .menu{
                  width:800px;                 
                  color:black;
-                 background-color:lightslategray;
+                 background-color:lavender;
                  border:1px solid black;
                  position:relative;
                  margin-left: auto;
@@ -26,7 +26,7 @@
             .login{
                 
                 font-size:20px;
-                color:white;
+                color:black;
                 position: relative;
                 margin-right: 0px;
                 margin-top: 0px;

@@ -12,7 +12,7 @@
          <style>
             .menu{
                  width:800px;              
-                 background-color:lightslategray;
+                 background-color:lavender;
                  border:1px solid black;
                  position:relative;
                  margin-left: auto;

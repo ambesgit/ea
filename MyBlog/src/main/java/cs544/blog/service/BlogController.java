@@ -8,10 +8,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -118,7 +116,7 @@ public class BlogController {
      }
      @RequestMapping(value="/blogger", method=RequestMethod.POST)
      public String addBlogger(BloggerDto bloggerDto){        
-            blogService.addBlogger(bloggerDto.bloggerFactory());
+            blogService.addBlogger(bloggerDto.bloggerFactory());//creat blogger from two objects
          return "redirect:/blogger";
        
      }  
