@@ -17,9 +17,7 @@ public class Blogger implements Serializable{
     @Id
     @GeneratedValue
     private Long id;
-    @OneToMany
-    @JoinColumn
-    
+    @OneToMany(mappedBy="author")       
     private List<Blog> blogs=new ArrayList();
   
     private String name;

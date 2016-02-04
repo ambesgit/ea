@@ -8,13 +8,13 @@
         <title>what does the moment look like  in your opinion </title>
         <style>
             .menu{
-                 width:800px;
-                 hieght:300px;
+                 width:800px;                
                  background-color:lightslategray;
                  border:1px solid black;
                  position:relative;
                  margin-left: auto;
                  margin-right: auto;
+                 
                  
             }
             .links{
@@ -22,6 +22,7 @@
                 font-size:20px;
                 color:black;
                 text-decoration: none;
+                
             }
             .login{
                 
@@ -40,8 +41,7 @@
             <div class="menu">
                 <a class="links" href="/MyBlog/blog">BLOG</a>
                 <a class="links" href="/MyBlog/blogger">REGISTER</a>
-                <a class="links"href="/MyBlog/post_">POST</a>
-                <a class="links"href="/MyBlog/comment">COMMENT</a>
+                <a class="links"href="/MyBlog/post_">POST</a>                
                 <a class="login" href="/MyBlog/login">LOGIN</a>
             </div>
         

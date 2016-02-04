@@ -1,17 +1,15 @@
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link href="resources/css/style.css" rel="stylesheet" type="text/css" />
+        <title>Blogger</title>
          <style>
             .menu{
-                 width:800px;              
+                 width:800px;                  
+                 color:black;
                  background-color:lightslategray;
                  border:1px solid black;
                  position:relative;
@@ -22,13 +20,13 @@
             .links{
                 padding:10px;
                 font-size:20px;
-                color:black;
+                color:white;
                 text-decoration: none;
             }
             .login{
                 
                 font-size:20px;
-                color:black;
+                color:white;
                 position: relative;
                 margin-right: 0px;
                 margin-top: 0px;
@@ -36,50 +34,42 @@
                 float: right;
                 text-decoration: none;
             }
-            table,h1{
-                width:400px;
-                 position:relative;
-                 margin-left: auto;
-                 margin-right: auto;
+            tr{
+                color:black;
+                font-size: 20px;
+                padding:5px;
+                height:40px;
+            }
+            input{
+                height:25px;
+                font-size:15px;
+                width:200px;
+                border-radius: 5px;                
+                background-color:lightgrey;
             }
             .submit{                
-                background-color: orange;
-                font-size: 20px;
-                color:white;
-                border: 1px solid red;
-                position: relative;
-                float: right;
-                margin-left:400px; 
-                border-bottom-left-radius: 3px;
-                border-bottom-right-radius: 3px;
-            }
-            textarea,input{
-                border-radius: 5px;
-                border-color: blue;
-                background-color:lemonchiffon;
+                width:100px;
             }
         </style>
     </head>
-    <body>
+    <body >
          <div class="menu">
                 <a class="links" href="/MyBlog/blog">BLOG</a>
                 <a class="links" href="/MyBlog/blogger">REGISTER</a>
-                <a class="links"href="/MyBlog/post_">POST</a>               
-                <a class="login" href="/MyBlog/index">LogOut</a>
+                <a class="links"href="/MyBlog/post_">POST</a>                
+                <a class="login" href="/MyBlog/login">LOGIN</a>
             </div>
-        
-       <form:form commandName="blog" action="post_" method="post" cssClass="menu">            
-            <form:errors path="*" cssClass="errorblock" element="div" />
-            
-            <table>
-                 
+        <table class="menu">
+         <form:form commandName="comment" action="comment" method="post" cssClass="menu">            
+            <form:errors path="*" cssClass="errorblock" element="div" />            
+            <table>                 
                 <tr>
                    <h1>Post your Blog </h1>                    
                 </tr> 
                 <tr>
                     <td> 
-                        <form:label for="title"path="">Title:</form:label>
-                        <form:input path="title" id="title"/> 
+                        <form:label for="comment"path="">Title:</form:label>
+                        <form:input path="" id="comment"/> 
                     </td>
                     <td><form:errors path="title" cssClass="error"/> </td>
                 </tr>
@@ -91,5 +81,6 @@
             </table>
             <input type="submit" class="submit"/>
         </form:form>
+	</table>
     </body>
 </html>

@@ -20,7 +20,7 @@ public class Blog {
     private String title;
     @Lob
     private String content;
-    @ManyToOne
+    @ManyToOne    
     private Blogger author;
     @OneToMany
     @JoinColumn
@@ -91,5 +91,12 @@ public class Blog {
     public void setPostedDate(Date postedDate) {
         this.postedDate = postedDate;
     }
-    
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }    
 }

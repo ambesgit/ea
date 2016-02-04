@@ -3,17 +3,15 @@ package cs544.blog.service;
 
 import cs544.blog.domain.Blog;
 import cs544.blog.domain.Blogger;
-import java.util.Date;
+import cs544.blog.domain.Comment;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 @Transactional
@@ -37,7 +35,7 @@ public class BlogController {
         this.credintial = credintial;
     } 
     
-    //Routing based on url and http methods
+    //Welcome page
     @RequestMapping(value="/")
     public String welcomePage(){
             return "index";
@@ -47,6 +45,9 @@ public class BlogController {
         
             return "index";
         }
+    
+    
+    //Login page 
     @RequestMapping(value="/login", method=RequestMethod.GET)
     public String login(HttpSession session,@ModelAttribute Credintial credintial){
         if(session.getAttribute("bgr")!=null){
@@ -65,26 +66,43 @@ public class BlogController {
         }
         return "redirect:/login";    
     }
+    
+    
+    //Blog page 
     @RequestMapping(value="/blog",method=RequestMethod.GET)
     public String getBlogs(Model model, Blog blog){       
        model.addAttribute("blogs", blogService.getBlogs());
        
         return "blogs";
     }
+    @RequestMapping(value="/blog/{blogId}",method=RequestMethod.GET)
+    public String getBlog(Model model,@PathVariable long blogId,Blog blog,Comment comment){       
+       model.addAttribute("blog", blogService.getBlog(blogId));       
+        return "blog";
+    }
+    @RequestMapping(value="/blog/{blogId}",method=RequestMethod.POST)
+    public String postComment(@PathVariable long blogId,Comment comment){ 
+        blogService.addComment(blogId, comment);
+        return "redirect:/blog/"+blogId;
+    }
+      //post page 
      @RequestMapping(value="/post_", method=RequestMethod.POST)
      public String postBlog(HttpSession session,Blog blog){
          Blogger b=(Blogger)session.getAttribute("bgr");                 
          blogService.addBlogger(b,blog);
          return "redirect:/post_";
-     }
+     }     
+   
      @RequestMapping(value="/post_", method=RequestMethod.GET)
      public String gettBlog(HttpSession session,@ModelAttribute Blog blog){
          if(session.getAttribute("bgr")!=null)
              return "post_";
          else
-         return "login";
+         return "index";
          
      }
+     
+     //Blogger page 
      @RequestMapping(value="/blogger", method=RequestMethod.GET)
      public String gettBlogger(BloggerDto bloggerDto){
          
@@ -95,5 +113,22 @@ public class BlogController {
             blogService.addBlogger(bloggerDto.bloggerFactory());
          return "redirect:/blogger";
        
-     }     
+     }  
+     
+     //Comment page
+     @RequestMapping(value="/comment",method=RequestMethod.GET)
+     public String getComment(@ModelAttribute Comment comment){
+         
+        return "comment";
+        }
+     @RequestMapping(value="/comment/{blogId}",method=RequestMethod.POST)
+     public String postComments(@PathVariable long blogId,Comment comment){
+         //process the post 
+        return "redirect:/blog/"+blogId;
+     }
+     @RequestMapping(value="/comment/{blogId}",method=RequestMethod.GET)
+     public String getCommentByBlogId(Model m,@PathVariable long blogId,Comment comment){  
+                 
+        return "redirect:/blog/"+blogId;
+     }
 }

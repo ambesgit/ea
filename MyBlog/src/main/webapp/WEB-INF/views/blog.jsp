@@ -34,7 +34,7 @@
                 float: right;
                 text-decoration: none;
             }
-            .mate,#id{
+            .mate{
                 color:black;
                 border: 1px solid black;
                 border-right: 3px;
@@ -49,18 +49,32 @@
                 <a class="links"href="/MyBlog/post_">POST</a>                
                 <a class="login" href="/MyBlog/login">LOGIN</a>
             </div>
-        
-	<table class="menu">
-        <tr><h2 class="menu mate">Blogs</h2></tr>
-	<c:forEach var="blog" items="${blogs}">  
-         <tr class="mate">
-         <td><pre>Title: ${blog.title} </pre><pre>Number of comments: ${blog.views}</pre>
-         <pre>Posted on: ${blog.postedDate}</pre><pre>Posted by: ${blog.author.name}</pre></td>     
-             
-         <td>${blog.content}</td>
-        </tr> 
-        <tr><td><a href="/MyBlog/blog/${blog.id}" id="detail">Detail</a></td></tr>
-	</c:forEach>
-	</table>
+    <body>
+        <table class="menu">
+        <tr><h2 class="menu mate">Blog</h2></tr>
+        <tr><td>${blog.content}</td></tr>
+         </table>
+        <table class="menu">
+        <c:forEach var="comment" items="${blog.comments}">
+            <tr><td>comments...${comment.commentedDate}</td></tr>
+            <tr><td>${comment.content}</td></tr> 
+        </c:forEach>        
+        </table>
+        <form:form commandName="comment" method="post" cssClass="menu">            
+            <form:errors path="*" cssClass="errorblock" element="div" />            
+            <table>                 
+                <tr>
+                   <h1>Post your Comment </h1>                    
+                </tr> 
+              
+                <tr>                  
+                    <td><form:textarea path="content" value="" rows="5" cols="50"/> </td>
+                    
+                    <td><form:errors path="content" cssClass="error"/> </td>
+                </tr> 
+                
+            </table>
+            <input type="submit" class="submit"/>
+        </form:form>
     </body>
 </html>

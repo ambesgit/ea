@@ -65,10 +65,8 @@
     </bean>
     <bean id="commentDao" class="cs544.blog.dao.CommentDao">
            <constructor-arg ref="sessionFactory"/>
-    </bean>
-    <bean id="readerDao" class="cs544.blog.dao.ReaderDao">
-           <constructor-arg ref="sessionFactory"/>
-    </bean>
+           <constructor-arg ref="blogDao"/>
+    </bean>   
     <bean id="addressDao" class="cs544.blog.dao.AddressDao">
            <constructor-arg ref="sessionFactory"/>
     </bean>
@@ -78,8 +76,7 @@
     <bean id="blogService" class="cs544.blog.service.BlogService">
         <constructor-arg ref="blogDao"/>
         <constructor-arg ref="bloggerDao"/>
-        <constructor-arg ref="commentDao"/>
-        <constructor-arg ref="readerDao"/>
+        <constructor-arg ref="commentDao"/>        
         <constructor-arg ref="addressDao"/>
     </bean>        
  <!-- THE FOLLOWING WILL BE USED FOR MVC CONFIGURATION-->

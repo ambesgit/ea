@@ -1,6 +1,7 @@
 
 package cs544.blog.domain;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,8 +15,9 @@ public class Comment {
     private Long id;
     @Lob
     private String content;
-    
-     public Comment() {
+    private Date commentedDate;
+    public Comment(){
+         
     }
      public Comment(String content){
          this.content=content;
@@ -27,15 +29,20 @@ public class Comment {
     private void setId(Long id) {
         this.id = id;
     }
-
-   
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Date getCommentedDate() {
+        return commentedDate;
+    }
+
+    public void setCommentedDate(Date commentedDate){
+        this.commentedDate = commentedDate;
     }
     
 }

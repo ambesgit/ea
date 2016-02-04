@@ -9,8 +9,7 @@
     </head>
        <style>
             .menu{
-                 width:800px;
-                 hieght:300px;
+                 width:800px;                
                  background-color:lightslategray;
                  border:1px solid black;
                  position:relative;
@@ -54,8 +53,7 @@
          <div class="menu">
                 <a class="links" href="/MyBlog/blog">BLOG</a>
                 <a class="links" href="/MyBlog/blogger">REGISTER</a>
-                <a class="links"href="/MyBlog/post_">POST</a>
-                <a class="links"href="/MyBlog/comment">COMMENT</a>
+                <a class="links"href="/MyBlog/post_">POST</a>                
                 <a class="login" href="/MyBlog/login">LOGIN</a>
             </div>
         <form:form commandName="credintial" action="login" method="post" cssClass="menu">
